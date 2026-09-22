@@ -1,0 +1,1 @@
+-- Baseline technique. Les tables metier seront ajoutees par des migrations versionnees.
