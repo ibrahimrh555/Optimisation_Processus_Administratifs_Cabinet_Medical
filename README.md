@@ -27,6 +27,7 @@ Le frontend est disponible sur `http://localhost:5173` et l'API sur `http://loca
 - [Regles metier](docs/04-regles-metier.md)
 - [Backlog](docs/05-backlog.md)
 - [Strategie Git](docs/06-strategie-git.md)
+- [Systeme visuel](docs/07-design-system.md)
 
 ## Etat
 
