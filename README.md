@@ -10,6 +10,15 @@ Reconstruction fiable du systeme de gestion d'un cabinet medical.
 - Migrations : Flyway
 - Infrastructure locale : Docker Compose
 
+## Deploiement
+
+- Frontend : GitHub Pages
+- Backend : Heroku Eco
+- Base de donnees : Neon PostgreSQL
+- Branche de production : `deployment`
+
+Heroku n'offre pas de plan gratuit. Le plan Eco est l'option minimale payante ; les instructions sont disponibles dans le [guide de deploiement](docs/08-deploiement.md).
+
 ## Demarrage rapide
 
 1. Copier `.env.example` vers `.env`.
