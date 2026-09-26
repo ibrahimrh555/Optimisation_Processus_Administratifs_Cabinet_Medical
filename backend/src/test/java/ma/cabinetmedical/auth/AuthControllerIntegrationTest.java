@@ -49,7 +49,7 @@ class AuthControllerIntegrationTest {
     void loginReturnsJwtAndSafeUserData() throws Exception {
         String response = mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{"email":"ADMIN@CABINET.MA","password":"Password123!"}"""))
+                        .content("{\"email\":\"ADMIN@CABINET.MA\",\"password\":\"Password123!\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.tokenType").value("Bearer"))
                 .andExpect(jsonPath("$.accessToken").isNotEmpty())
@@ -66,7 +66,7 @@ class AuthControllerIntegrationTest {
 
         String loginBody = mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{"email":"admin@cabinet.ma","password":"Password123!"}"""))
+                        .content("{\"email\":\"admin@cabinet.ma\",\"password\":\"Password123!\"}"))
                 .andReturn().getResponse().getContentAsString();
         JsonNode login = objectMapper.readTree(loginBody);
 
@@ -81,7 +81,7 @@ class AuthControllerIntegrationTest {
     void invalidPasswordIsRejectedWithGenericMessage() throws Exception {
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{"email":"admin@cabinet.ma","password":"incorrect"}"""))
+                        .content("{\"email\":\"admin@cabinet.ma\",\"password\":\"incorrect\"}"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.message").value("E-mail ou mot de passe incorrect"));
     }
@@ -103,7 +103,7 @@ class AuthControllerIntegrationTest {
     void invalidPayloadReturnsFieldErrors() throws Exception {
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{"email":"bad-email","password":""}"""))
+                        .content("{\"email\":\"bad-email\",\"password\":\"\"}"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("Donnees invalides"))
                 .andExpect(jsonPath("$.fields.email").exists())
@@ -113,7 +113,7 @@ class AuthControllerIntegrationTest {
     private void expectLoginRejected() throws Exception {
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{"email":"admin@cabinet.ma","password":"Password123!"}"""))
+                        .content("{\"email\":\"admin@cabinet.ma\",\"password\":\"Password123!\"}"))
                 .andExpect(status().isUnauthorized());
     }
 }
