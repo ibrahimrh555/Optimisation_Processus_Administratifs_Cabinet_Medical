@@ -34,12 +34,13 @@ class AuthControllerIntegrationTest {
     @Autowired PasswordEncoder passwordEncoder;
 
     private User admin;
+    private Cabinet cabinet;
 
     @BeforeEach
     void setUp() {
         userRepository.deleteAll();
         cabinetRepository.deleteAll();
-        Cabinet cabinet = cabinetRepository.save(new Cabinet("Cabinet Test"));
+        cabinet = cabinetRepository.save(new Cabinet("Cabinet Test"));
         admin = userRepository.save(new User(
                 cabinet, "Ibrahim", "Admin", "admin@cabinet.ma", passwordEncoder.encode("Password123!"), Role.ADMIN
         ));
@@ -93,8 +94,8 @@ class AuthControllerIntegrationTest {
         expectLoginRejected();
 
         admin.setActive(true);
-        admin.getCabinet().setActive(false);
-        cabinetRepository.save(admin.getCabinet());
+        cabinet.setActive(false);
+        cabinetRepository.save(cabinet);
         userRepository.save(admin);
         expectLoginRejected();
     }
